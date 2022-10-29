@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Inicio</title>
+</head>
+<body>
+    <header th:replace="layout/plantilla :: header"></header>
+	<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}" class="btn btn-success btn -block">[[#{producto.crear}]]</a>
+	<br>
+	<div th:if="${productos != null and !productos.empty}">
+		<table class="table table-striped table-hover">
+			<tr>
+				<th>[[#{producto.nombre}]]</th>
+				<th>[[#{producto.descripcion}]]</th>
+				<th>[[#{producto.cantidad}]]</th>
+				<th>[[#{producto.categoria}]]</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')" >[[#{producto.editar}]]</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')" >[[#{producto.eliminar}]]</th>
+			</tr>
+			<tr th:each="producto : ${productos}">
+				<td th:text="${producto.nombre}">Mostrar Nombre</td>
+				<td th:text="${producto.descripcion}">Mostrar Descripcion</td>
+				<td th:text="${producto.cantidad}">Mostrar Email</td>
+				<td th:text="${producto.categoria}">Mostrar Telefono</td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/} + ${producto.id}" th:text="Editar"></a></td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar(id=${producto.id})}" th:text="Eliminar"></a></td>
+			</tr>
+		</table>
+	</div>
+	<div th:if="${productos == null or productos.empty}">
+		La lista de productos esta vacia
+	</div>
+	<footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>
