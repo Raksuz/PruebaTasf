@@ -1,5 +1,7 @@
 package com.prueba.tasf.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class ControladorInicial {
 	
 	@GetMapping("/")
 	private String inicio(Model m) {
-		var productos = productoService.listarP();
+		List<Producto> productos = productoService.listarP();
 		m.addAttribute("productos", productos);
 		return "index";
 	}
