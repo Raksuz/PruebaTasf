@@ -24,7 +24,6 @@
                     <ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto">
                         <li class="nav-item mr-3">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user"></i>
                                 <span th:text="#{barra.b}">Bienvenido</span>
                                 <span sec:authentication="name">Usuario</span>
                             </a>
@@ -32,7 +31,7 @@
                         <li class="nav-item">
                             <form method="POST" th:action="@{/logout}">
                                 <a href="#" onclick="this.parentNode.submit();" class="nav-link">
-                                <i class="fas fa-user-times"></i> [[#{barra.s}]]
+                                 [[#{barra.s}]]
                                 </a>
                             </form>
                         </li>
