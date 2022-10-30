@@ -10,6 +10,12 @@
 </head>
 <body>
     <header th:replace="layout/plantilla :: header"></header>
+	<section id="actions" class="py-4 mb-4 bg-light">
+		<div class="container">
+			<div class="row">
+			</div>
+		</div>
+	</section>
 	<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}" class="btn btn-success btn -block">[[#{producto.crear}]]</a>
 	<br>
 	<div th:if="${productos != null and !productos.empty}">
